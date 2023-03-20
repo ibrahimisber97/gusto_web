@@ -1,0 +1,47 @@
+<html>
+
+</head>
+
+<title>Countries</title>
+
+<span class="border border-primary"></span>
+
+<body>
+    <h1>Countries</h1>
+    <div id="allcountres" class="row"> </div>
+
+    <script>
+        const apiUrl = 'https://localhost:3030';
+            const menuItemsContainer = document.getElementById('menu-items');
+
+            fetch('https://localhost:3030')
+                .then(response => response.json())
+                .then(menuItems => {
+                    // Loop through each item in the menu and create a card for it
+                    menuItems.forEach(item => {
+                        const card = `
+        <div class="col-lg-6">
+          <h1 class="mb-5">${item.category}</h1>
+          <div class="row align-items-center mb-5">
+            <div class="col-4 col-sm-3">
+              <img class="w-100 rounded-circle mb-3 mb-sm-0" src="${item.image}" alt="${item.name}">
+              <h5 class="menu-price">$${item.price}</h5>
+            </div>
+            <div class="col-8 col-sm-9">
+              <h4>${item.name}</h4>
+              <p class="m-0">${item.description}</p>
+            </div>
+          </div>
+        </div>
+      `;
+                        menuItemsContainer.insertAdjacentHTML('beforeend', card);
+                    });
+                })
+                .catch(error => console.error(error));
+
+
+    </script>
+
+</body>
+
+</html>
